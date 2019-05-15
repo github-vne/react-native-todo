@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import {Button, Text, View, ScrollView, StyleSheet} from "react-native";
 
+/* Module */
+import axios from 'axios';
+
 /* Components */
 import Coupon from './Coupon';
 
+/* Const */
 const url = "https://picsum.photos/v2/list?page=2&limit=10";
+// const url = "/get_all_coupons";
 
 export default class Home extends Component {
 
@@ -21,14 +26,15 @@ export default class Home extends Component {
         headerTitle: "Купоны"
     };
 
-    componentDidMount = async () => {
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            this.setState({data});
-        } catch (e) {
-            throw e;
-        }
+    componentDidMount() {
+        axios.get(url)
+            .then(res => {
+                console.info(res.data);
+                this.setState({data: res.data});
+            })
+            .catch(err => {
+                console.error(err);
+            })
     };
 
     render() {
@@ -48,5 +54,4 @@ const styles = StyleSheet.create({
         paddingBottom: 40,
         marginBottom: 40,
     },
-
 });
