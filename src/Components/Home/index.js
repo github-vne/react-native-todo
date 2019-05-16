@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {Button, Text, View, ScrollView, StyleSheet} from "react-native";
 
+/* Redux */
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {saveCoupons} from "../../Store/Actions";
+
 /* Module */
 import axios from 'axios';
 
@@ -9,13 +14,10 @@ import Coupon from './Coupon';
 
 /* Const */
 const url = "https://picsum.photos/v2/list?page=2&limit=10";
+
 // const url = "/get_all_coupons";
 
-export default class Home extends Component {
-
-    state = {
-        data: [],
-    };
+class Home extends Component {
 
     static navigationOptions = {
         headerStyle: {
@@ -27,18 +29,21 @@ export default class Home extends Component {
     };
 
     componentDidMount() {
-        axios.get(url)
-            .then(res => {
-                console.info(res.data);
-                this.setState({data: res.data});
-            })
-            .catch(err => {
-                console.error(err);
-            })
+        const {data} = this.props;
+        if (data.length === 0) {
+            axios.get(url)
+                .then(res => {
+                    this.props.saveCoupons(res.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        }
+
     };
 
     render() {
-        const {data} = this.state;
+        const {data} = this.props;
         const {container} = styles;
         return (
             <ScrollView style={container}>
@@ -55,3 +60,17 @@ const styles = StyleSheet.create({
         marginBottom: 40,
     },
 });
+
+const mapStateToProps = (state) => {
+    return {
+        data: state.data,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveCoupons: bindActionCreators(saveCoupons, dispatch),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
