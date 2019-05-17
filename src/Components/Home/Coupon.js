@@ -2,17 +2,23 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
-export default class Coupon extends Component {
+/* Redux */
+import {saveCoupons} from "../../Store/Actions";
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+class Coupon extends Component {
+
     render() {
-        const {container, logo, description, title, star} = styles;
+        const {container, logo, description, title, star } = styles;
         const {el} = this.props;
         return (
             <View style={container}>
                 <Icon
                     style={star}
-                    name="md-star"
+                    name={el.active ? "md-star" : "md-star-outline"}
                     size={30}
-                    // onPress={() => this.props.navigation.closeDrawer()}
+                    onPress={() => this.props.saveCoupons(el)}
                 />
                 <Image style={logo} source={{uri: el.download_url}}/>
                 <Text style={description}>
@@ -58,3 +64,17 @@ const styles = StyleSheet.create({
         right: 10,
     },
 });
+
+const mapStateToProps = (state) => {
+    return {
+        myCoupons: state.myCoupons,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveCoupons: bindActionCreators(saveCoupons, dispatch),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Coupon);

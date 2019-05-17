@@ -1,1 +1,2 @@
-export const SAVE_COUPONS = "SAVE_COUPONS";
+export const CHANGE_COUPONS_LIST = "CHANGE_COUPONS_LIST";
+export const SAVE_COUPON = "SAVE_COUPON";

@@ -1,8 +1,18 @@
-import {SAVE_COUPONS} from '../Const';
+import {
+    CHANGE_COUPONS_LIST,
+    SAVE_COUPON,
+} from '../Const';
 
-export const saveCoupons = (data) => {
+export const changeCouponsList = (data) => {
     return {
-        type: SAVE_COUPONS,
+        type: CHANGE_COUPONS_LIST,
         payload: data,
+    }
+};
+
+export const saveCoupons = (coupon) => {
+    return {
+        type: SAVE_COUPON,
+        payload: coupon,
     }
 };

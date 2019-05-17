@@ -4,7 +4,7 @@ import {Button, Text, View, ScrollView, StyleSheet} from "react-native";
 /* Redux */
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {saveCoupons} from "../../Store/Actions";
+import {changeCouponsList} from "../../Store/Actions";
 
 /* Module */
 import axios from 'axios';
@@ -15,31 +15,25 @@ import Coupon from './Coupon';
 /* Const */
 const url = "https://picsum.photos/v2/list?page=2&limit=10";
 
-// const url = "/get_all_coupons";
-
 class Home extends Component {
 
     static navigationOptions = {
-        headerStyle: {
-            color: 'white',
-            textAlign: 'center',
-            backgroundColor: '#33b5e5',
-        },
-        headerTitle: "Купоны"
+        headerStyle: {backgroundColor: '#33b5e5'},
+        headerTintColor: '#fff',
+        headerTitle: "Все Купоны",
     };
 
     componentDidMount() {
-        const {data} = this.props;
+        const {data, changeCouponsList} = this.props;
         if (data.length === 0) {
             axios.get(url)
                 .then(res => {
-                    this.props.saveCoupons(res.data);
+                    changeCouponsList(res.data);
                 })
                 .catch(err => {
                     console.error(err);
                 })
         }
-
     };
 
     render() {
@@ -47,7 +41,15 @@ class Home extends Component {
         const {container} = styles;
         return (
             <ScrollView style={container}>
-                {data.map((el, i) => <Coupon key={i} el={el}/>)}
+                {data.map((el, i) => {
+                    return (
+                        <Coupon
+                            active={false}
+                            key={i}
+                            el={el}
+                        />
+                    )
+                })}
             </ScrollView>
         );
     }
@@ -64,12 +66,13 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         data: state.data,
+        myCoupons: state.myCoupons,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveCoupons: bindActionCreators(saveCoupons, dispatch),
+        changeCouponsList: bindActionCreators(changeCouponsList, dispatch),
     }
 };
 
