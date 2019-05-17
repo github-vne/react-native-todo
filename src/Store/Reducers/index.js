@@ -10,7 +10,6 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-
         case CHANGE_COUPONS_LIST:
             return {
                 ...state,
@@ -23,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
             currentData[obj].active ? currentData[obj].active = false : currentData[obj].active = true;
             return {
                 ...state,
-                myCoupons: state.myCoupons.concat(action.payload),
+                myCoupons: currentData.filter(el => {return el.active}),
                 data: currentData,
             };
 

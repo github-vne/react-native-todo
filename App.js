@@ -1,6 +1,5 @@
 /* Module */
 import React, {Component} from 'react';
-import {View} from 'react-native';
 import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -60,7 +59,6 @@ const AppDrawerNavigator = createDrawerNavigator({
 }, DrawerConfig);
 
 const AppContainer = createAppContainer(AppDrawerNavigator);
-
 export default class App extends Component {
     render() {
         return (

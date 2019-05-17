@@ -8,9 +8,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 class Coupon extends Component {
-
     render() {
-        const {container, logo, description, title, star } = styles;
+        const {container, logo, description, title, star} = styles;
         const {el} = this.props;
         return (
             <View style={container}>
