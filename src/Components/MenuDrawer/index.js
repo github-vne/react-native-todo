@@ -25,9 +25,7 @@ export default class MenuDrawer extends Component {
             <View style={container}>
                 <View style={topLinks}>
                     <Icon
-                        style={{
-                            marginRight: 20,
-                        }}
+                        style={{marginRight: 20}}
                         name="md-close"
                         size={30}
                         onPress={() => this.props.navigation.closeDrawer()}
@@ -49,13 +47,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
     },
     topLinks: {
+        backgroundColor: '#fff',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         padding: 10,
         paddingTop: 30,
         paddingBottom: 20,
-        backgroundColor: '#33b5e5',
+        borderBottomWidth: 1,
+        borderColor: '#8a8a8a',
     },
     logo: {
         width: 100,

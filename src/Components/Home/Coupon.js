@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
 /* Redux */
@@ -32,13 +32,17 @@ class Coupon extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderColor: '#323232',
-        borderWidth: 1,
-        padding: 10,
+        backgroundColor: '#FFF9E0',
+        padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 10,
+        marginBottom: 15,
         position: 'relative',
+
+        elevation: 3,
+        // borderWidth: 1,
+        // borderRadius: 2,
+        // borderColor: '#ddd',
     },
     logo: {
         width: 50,
@@ -48,13 +52,15 @@ const styles = StyleSheet.create({
     },
     description: {
         textAlign: 'center',
+        color: "#8A8A8A",
         marginBottom: 10,
+        fontSize: 18,
         marginTop: 10,
     },
     title: {
         textAlign: 'center',
         fontSize: 22,
-        color: "green",
+        color: "#212121",
         fontWeight: 'bold',
     },
     star: {

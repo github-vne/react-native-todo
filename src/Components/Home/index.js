@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, View, ScrollView, StyleSheet} from "react-native";
+import {Text, ScrollView, StyleSheet, Button, View} from "react-native";
 
 /* Redux */
 import {connect} from 'react-redux';
@@ -14,13 +14,14 @@ import Coupon from './Coupon';
 
 /* Const */
 const url = "https://picsum.photos/v2/list?page=2&limit=10";
+// const url = "http://192.168.4.175:3000/get_all_coupons";
 
 class Home extends Component {
 
     static navigationOptions = {
-        headerStyle: {backgroundColor: '#33b5e5'},
-        headerTintColor: '#fff',
-        headerTitle: "Все Купоны",
+        headerStyle: {backgroundColor: '#FECC00'},
+        headerTintColor: '#000',
+        headerTitle: "Купоны",
     };
 
     componentDidMount() {
@@ -38,7 +39,7 @@ class Home extends Component {
 
     render() {
         const {data} = this.props;
-        const {container} = styles;
+        const {container, button, buttonText} = styles;
         return (
             <ScrollView style={container}>
                 {data.map((el, i) => {
@@ -57,9 +58,9 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-        paddingBottom: 40,
-        marginBottom: 40,
+        paddingTop: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
 });
 

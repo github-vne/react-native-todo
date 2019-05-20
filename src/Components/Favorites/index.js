@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import {Button, Text, View, ScrollView, StyleSheet} from "react-native";
+import {Button, Text, View, ScrollView, StyleSheet, TouchableHighlight} from "react-native";
 
 /* Redux */
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {changeCouponsList} from "../../Store/Actions";
 
 /* Components */
 import Coupon from '../Home/Coupon';
@@ -12,23 +10,25 @@ import Coupon from '../Home/Coupon';
 class Favorites extends Component {
 
     static navigationOptions = {
-        headerStyle: {backgroundColor: '#33b5e5'},
-        headerTintColor: '#fff',
+        headerStyle: {backgroundColor: '#FECC00'},
+        headerTintColor: '#000',
         headerTitle: "Сохраненные",
     };
 
     render() {
         const {myCoupons} = this.props;
-        const {container} = styles;
+        const {container, button, buttonText, redirectBox} = styles;
         return (
             <View style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
                 {myCoupons.length === 0 ?
-                    <View>
-                        <Text style={{fontSize: 30, color: 'green', marginBottom: 10}}>У вас нет купонов</Text>
-                        <Button
+                    <View style={redirectBox}>
+                        <Text style={{fontSize: 30, marginBottom: 20}}>У вас нет купонов</Text>
+                        <TouchableHighlight
+                            style={button}
                             onPress={() => this.props.navigation.navigate('Home')}
-                            title="Все купоны"
-                        />
+                        >
+                            <Text style={buttonText}>ПОЛУЧИТЬ</Text>
+                        </TouchableHighlight>
                     </View>
                     :
                     <ScrollView style={container}>
@@ -50,10 +50,28 @@ class Favorites extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-        paddingBottom: 40,
-        marginBottom: 40,
+        paddingTop: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
+    redirectBox:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        backgroundColor: '#FECC00',
+        width: 130,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: '#212121',
+        fontSize: 20,
+    }
 });
 
 const mapStateToProps = (state) => {
